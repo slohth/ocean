@@ -1,0 +1,4 @@
+main: dev.slohth.ocean.plugin.OceanPlugin
+name: Ocean
+version: "DEV"
+api-version: 1.16

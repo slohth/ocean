@@ -1,0 +1,5 @@
+main: dev.slohth.ocean.plugin.OceanPlugin
+name: Ocean
+version: "1.0-DEV"
+api-version: 1.16
+author: Brandon
