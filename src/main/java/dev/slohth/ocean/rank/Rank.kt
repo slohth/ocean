@@ -15,7 +15,7 @@ class Rank(private val ocean: Ocean) {
     private var color: ChatColor = ChatColor.WHITE
     private var default: Boolean = false
 
-    private val team: NametagTeam = NametagTeam(ocean, "", "", -1)
+    private val team: NametagTeam = NametagTeam(ocean, -1, "", "")
     private var priority: Int = -1
     private var nametagPrefix: String = ""
     private var nametagSuffix: String = ""

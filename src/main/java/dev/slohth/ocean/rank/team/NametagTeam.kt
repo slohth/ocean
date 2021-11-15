@@ -5,9 +5,17 @@ import dev.slohth.ocean.profile.Profile
 import dev.slohth.ocean.utils.CC
 import org.bukkit.scoreboard.Team
 
-class NametagTeam(private val ocean: Ocean, private var prefix: String, private var suffix: String, private var priority: Int) {
+class NametagTeam(private val ocean: Ocean, private var priority: Int, private var prefix: String, private var suffix: String) {
 
-    companion object { var ID: Int = 0 }
+    companion object {
+        var ID: Int = 0
+        val TEAMS: Set<NametagTeam> = HashSet()
+
+        fun getSimilar(priority: Int, prefix: String, suffix: String): NametagTeam? {
+            for (team: NametagTeam in TEAMS) if (team.isSimilar(priority, prefix, suffix)) return team
+            return null
+        }
+    }
 
     private val members: Set<Profile> = HashSet()
 
@@ -22,6 +30,8 @@ class NametagTeam(private val ocean: Ocean, private var prefix: String, private 
         team.prefix = CC.trns(prefix);
         team.suffix = CC.trns(suffix);
         team.color = CC.getLastColor(prefix)
+
+        TEAMS + this
     }
 
     fun addMember(profile: Profile) {
@@ -39,6 +49,7 @@ class NametagTeam(private val ocean: Ocean, private var prefix: String, private 
     }
 
     fun isMember(profile: Profile): Boolean { return members.contains(profile) }
+    fun size(): Int { return members.size }
 
     fun getTeamName(): String { return teamName }
     fun getPrefix(): String { return prefix }
@@ -72,6 +83,26 @@ class NametagTeam(private val ocean: Ocean, private var prefix: String, private 
         team.color = CC.getLastColor(prefix)
 
         for (profile: Profile in members) team.addPlayer(profile.getPlayer())
+    }
+
+    fun getSimilar(): NametagTeam? {
+        for (team: NametagTeam in TEAMS) if (team.isSimilar(this)) return team
+        return null
+    }
+
+    fun isSimilar(team: NametagTeam): Boolean {
+        return (priority == team.getPriority() && prefix == team.getPrefix() && suffix == team.getSuffix())
+    }
+
+    fun isSimilar(priority: Int, prefix: String, suffix: String): Boolean {
+        return (this.priority == priority && this.prefix == prefix && this.suffix == suffix)
+    }
+
+    fun remove() {
+        for (profile: Profile in members) team.removePlayer(profile.getPlayer())
+        team.unregister()
+        ocean.getNametagScoreboard().teams.remove(team)
+        TEAMS - this
     }
 
     private fun getTeamNameFromPriority(priority: Int): String {
