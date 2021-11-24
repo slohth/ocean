@@ -29,7 +29,7 @@ class RankManager(private val ocean: Ocean) {
 
                 Config.RANKS.getConfig().get("$rankName.permissions")?.let {
                     for (perm: String in Config.RANKS.getConfig().getStringList("$rankName.permissions")) {
-                        rank.getPermissions() + Pair(if (perm.startsWith("-")) perm.substring(1) else perm, !perm.startsWith("-"))
+                        rank.getPermissions()[if (perm.startsWith("-")) perm.substring(1) else perm] = !perm.startsWith("-")
                     }
                 }
 

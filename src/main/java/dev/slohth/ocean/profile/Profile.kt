@@ -48,8 +48,8 @@ class Profile(private val ocean: Ocean, private val uuid: UUID) {
     fun getUUID(): UUID { return uuid }
     fun getAttachment(): PermissionAttachment { return attachment }
 
-    fun getRanks(): Set<Rank> { return ranks }
-    fun getPermissions(): Set<String> { return permissions }
+    fun getRanks(): MutableSet<Rank> { return ranks }
+    fun getPermissions(): MutableSet<String> { return permissions }
 
     fun getOptions(): ProfileOptions { return options }
 

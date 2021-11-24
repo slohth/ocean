@@ -22,8 +22,8 @@ class Rank(private val ocean: Ocean) {
     private var chatSuffix: String = ""
     private var displayName: String = ""
 
-    private val children: Set<Rank> = HashSet()
-    private val permissions: Map<String, Boolean> = HashMap()
+    private val children: MutableSet<Rank> = HashSet()
+    private val permissions: MutableMap<String, Boolean> = HashMap()
 
     fun getUUID(): UUID { return uuid }
 
@@ -37,8 +37,8 @@ class Rank(private val ocean: Ocean) {
     fun getChatSuffix(): String { return chatSuffix }
     fun getDisplayName(): String { return displayName }
 
-    fun getChildren(): Set<Rank> { return children }
-    fun getPermissions(): Map<String, Boolean> { return permissions }
+    fun getChildren(): MutableSet<Rank> { return children }
+    fun getPermissions(): MutableMap<String, Boolean> { return permissions }
 
     fun setName(name: String): Boolean {
         ocean.getRankManager().getRankFromName(name.lowercase())?.let { return false }
