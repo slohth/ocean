@@ -5,11 +5,11 @@ import dev.slohth.ocean.profile.Profile
 import dev.slohth.ocean.utils.CC
 import org.bukkit.scoreboard.Team
 
-class NametagTeam(private val ocean: Ocean, private var priority: Int, private var prefix: String, private var suffix: String) {
+class NametagTeam(private val ocean: Ocean, private var priority: Int, private var prefix: String, private var suffix: String, private var rank: Boolean) {
 
     companion object {
         var ID: Int = 0
-        val TEAMS: Set<NametagTeam> = HashSet()
+        val TEAMS: MutableSet<NametagTeam> = HashSet()
 
         fun getSimilar(priority: Int, prefix: String, suffix: String): NametagTeam? {
             for (team: NametagTeam in TEAMS) if (team.isSimilar(priority, prefix, suffix)) return team
@@ -17,7 +17,7 @@ class NametagTeam(private val ocean: Ocean, private var priority: Int, private v
         }
     }
 
-    private val members: Set<Profile> = HashSet()
+    private val members: MutableSet<Profile> = HashSet()
 
     private var teamName: String
     private var team: Team
@@ -55,6 +55,7 @@ class NametagTeam(private val ocean: Ocean, private var priority: Int, private v
     fun getPrefix(): String { return prefix }
     fun getSuffix(): String { return suffix }
     fun getPriority(): Int { return priority }
+    fun isRankTeam(): Boolean { return rank }
 
     fun setPrefix(prefix: String) {
         this.prefix = prefix

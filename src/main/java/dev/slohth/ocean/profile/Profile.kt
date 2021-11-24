@@ -1,6 +1,7 @@
 package dev.slohth.ocean.profile
 
 import dev.slohth.ocean.Ocean
+import dev.slohth.ocean.profile.options.ProfileOptions
 import dev.slohth.ocean.rank.Rank
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
@@ -12,8 +13,10 @@ class Profile(private val ocean: Ocean, private val uuid: UUID) {
 
     private val attachment: PermissionAttachment = getPlayer().addAttachment(ocean.getPlugin())
 
-    private val ranks: Set<Rank> = HashSet()
-    private val permissions: Set<String> = HashSet()
+    private val ranks: MutableSet<Rank> = HashSet()
+    private val permissions: MutableSet<String> = HashSet()
+
+    private val options: ProfileOptions = ProfileOptions(ocean, this)
 
     fun getPrimaryRank(): Rank {
         var rank: Rank? = null
@@ -47,5 +50,7 @@ class Profile(private val ocean: Ocean, private val uuid: UUID) {
 
     fun getRanks(): Set<Rank> { return ranks }
     fun getPermissions(): Set<String> { return permissions }
+
+    fun getOptions(): ProfileOptions { return options }
 
 }

@@ -1,0 +1,69 @@
+owner:
+  priority: 0
+  nametag:
+    prefix: "&3&lADMIN &f"
+  prefix: "&8[&3&lADMIN&8] &f"
+  display: "&3Owner"
+  children:
+    - dev
+
+dev:
+  priority: 1
+  nametag:
+    prefix: "&3&lADMIN &f"
+  prefix: "&8[&3&lADMIN&8] &f"
+  display: "&3Dev"
+  children:
+    - admin
+
+admin:
+  priority: 2
+  nametag:
+    prefix: "&3&lADMIN &f"
+  prefix: "&8[&3&lADMIN&8] &f"
+  display: "&3Admin"
+  permissions:
+    - "*"
+
+srmod:
+  priority: 3
+  nametag:
+    prefix: "&3&lMOD &f"
+  prefix: "&8[&3&lMOD&8] &f"
+  display: "&3Sr.Mod"
+  permissions:
+    - "something"
+  children:
+    - mod
+
+mod:
+  priority: 4
+  nametag:
+    prefix: "&3&lMOD &f"
+  prefix: "&8[&3&lMOD&8] &f"
+  display: "&3Mod"
+  permissions:
+    - "something"
+  children:
+    - trial
+
+trial:
+  priority: 5
+  nametag:
+    prefix: "&3&lMOD &f"
+  prefix: "&8[&3&lMOD&8] &f"
+  display: "&3Trial"
+  permissions:
+    - "something"
+  children:
+    - guest
+
+guest:
+  default: true
+  priority: 15
+  nametag:
+    prefix: "&7Guest &f"
+  prefix: "&8[&7Guest&8] &7"
+  display: "&7Guest"
+  permissions:
+    - "something"

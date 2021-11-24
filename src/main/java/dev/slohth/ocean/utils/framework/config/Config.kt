@@ -10,7 +10,7 @@ import java.io.File
 
 enum class Config(private val identifier: String) {
 
-    USERS("users");
+    USERS("users"), RANKS("ranks");
 
     private val file: File
     private val config: YamlConfiguration

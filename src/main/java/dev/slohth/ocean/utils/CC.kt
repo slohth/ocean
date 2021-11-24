@@ -22,8 +22,9 @@ object CC {
 
     fun getLastColor(msg: String): ChatColor {
         var color: ChatColor = ChatColor.WHITE
+        if (msg.isEmpty()) return color
         for (i in 0..msg.length) {
-            if (msg[i] == ChatColor.COLOR_CHAR && i != msg.length - 1) color = ChatColor.getByChar(msg[i+1])!!
+            if ((i + 1) < msg.length && msg[i] == ChatColor.COLOR_CHAR) color = ChatColor.getByChar(msg[i+1])!!
         }
         return color
     }

@@ -10,7 +10,7 @@ class Ocean(private val plugin: JavaPlugin) {
 
     private val nametagScoreboard: Scoreboard = Bukkit.getScoreboardManager()!!.newScoreboard
 
-    private val rankManager: RankManager = RankManager()
+    private val rankManager: RankManager = RankManager(this)
     private val profileManager: ProfileManager = ProfileManager(this)
 
     init {
