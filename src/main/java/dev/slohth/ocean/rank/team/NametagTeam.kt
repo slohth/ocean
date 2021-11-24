@@ -31,20 +31,21 @@ class NametagTeam(private val ocean: Ocean, private var priority: Int, private v
         team.suffix = CC.trns(suffix);
         team.color = CC.getLastColor(prefix)
 
-        TEAMS + this
+        TEAMS.add(this)
     }
 
     fun addMember(profile: Profile) {
         if (!members.contains(profile)) {
-            members + profile
-            team.addPlayer(profile.getPlayer())
+            members.add(profile)
+            println(members)
+            team.addEntry(profile.getPlayer().name)
         }
     }
 
     fun removeMember(profile: Profile) {
         if (members.contains(profile)) {
-            members - profile
-            team.removePlayer(profile.getPlayer())
+            members.remove(profile)
+            team.removeEntry(profile.getPlayer().name)
         }
     }
 
@@ -70,7 +71,7 @@ class NametagTeam(private val ocean: Ocean, private var priority: Int, private v
 
     fun setPriority(priority: Int) {
         this.priority = priority
-        for (profile: Profile in members) team.removePlayer(profile.getPlayer())
+        for (profile: Profile in members) team.removeEntry(profile.getPlayer().name)
 
         team.unregister()
         ocean.getNametagScoreboard().teams.remove(team)
@@ -83,7 +84,7 @@ class NametagTeam(private val ocean: Ocean, private var priority: Int, private v
         team.suffix = CC.trns(suffix);
         team.color = CC.getLastColor(prefix)
 
-        for (profile: Profile in members) team.addPlayer(profile.getPlayer())
+        for (profile: Profile in members) team.addEntry(profile.getPlayer().name)
     }
 
     fun getSimilar(): NametagTeam? {
@@ -100,10 +101,10 @@ class NametagTeam(private val ocean: Ocean, private var priority: Int, private v
     }
 
     fun remove() {
-        for (profile: Profile in members) team.removePlayer(profile.getPlayer())
+        for (profile: Profile in members) team.removeEntry(profile.getPlayer().name)
         team.unregister()
         ocean.getNametagScoreboard().teams.remove(team)
-        TEAMS - this
+        TEAMS.remove(this)
     }
 
     private fun getTeamNameFromPriority(priority: Int): String {

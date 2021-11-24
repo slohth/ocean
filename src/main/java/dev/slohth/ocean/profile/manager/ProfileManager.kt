@@ -23,7 +23,7 @@ class ProfileManager(private val ocean: Ocean) : Listener {
             Config.USERS.getConfig().get("$uuid.ranks")?.let {
                 for (rank: String in Config.USERS.getStringList("$uuid.ranks")) {
                     val r: Rank? = ocean.getRankManager().getRankFromName(rank)
-                    r?.let { profile.getRanks() + r }
+                    r?.let { profile.getRanks().add(r) }
                 }
             }
             Config.USERS.getConfig().get("$uuid.permissions").let {
@@ -31,7 +31,7 @@ class ProfileManager(private val ocean: Ocean) : Listener {
             }
         }
 
-        if (profile.getRanks().isEmpty()) profile.getRanks() + ocean.getRankManager().getDefaultRank()
+        if (profile.getRanks().isEmpty()) profile.getRanks().add(ocean.getRankManager().getDefaultRank())
         profile.recalculatePermissions()
         profile.getOptions().update()
 
@@ -40,7 +40,7 @@ class ProfileManager(private val ocean: Ocean) : Listener {
 
     @EventHandler
     fun onJoin(e: PlayerJoinEvent) {
-        ocean.getNametagScoreboard().players + e.player
+        ocean.getNametagScoreboard().entries.add(e.player.name)
         registerUser(e.player.uniqueId)
     }
 

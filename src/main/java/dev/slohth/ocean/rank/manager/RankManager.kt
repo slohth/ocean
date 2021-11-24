@@ -41,7 +41,7 @@ class RankManager(private val ocean: Ocean) {
                     Config.RANKS.getConfig().get("${rank.getName()}.children")?.let {
                         for (rankName: String in Config.RANKS.getStringList("${rank.getName()}.children")) {
                             val child: Rank? = ocean.getRankManager().getRankFromName(rankName)
-                            child?.let { rank.getChildren() + child }
+                            child?.let { rank.getChildren().add(child) }
                         }
                     }
                 }
