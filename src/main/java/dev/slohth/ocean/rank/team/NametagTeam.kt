@@ -37,7 +37,6 @@ class NametagTeam(private val ocean: Ocean, private var priority: Int, private v
     fun addMember(profile: Profile) {
         if (!members.contains(profile)) {
             members.add(profile)
-            println(members)
             team.addEntry(profile.getPlayer().name)
         }
     }

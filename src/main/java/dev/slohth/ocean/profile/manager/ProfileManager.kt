@@ -40,7 +40,7 @@ class ProfileManager(private val ocean: Ocean) : Listener {
 
     @EventHandler
     fun onJoin(e: PlayerJoinEvent) {
-        ocean.getNametagScoreboard().entries.add(e.player.name)
+        e.player.scoreboard = ocean.getNametagScoreboard()
         registerUser(e.player.uniqueId)
     }
 
